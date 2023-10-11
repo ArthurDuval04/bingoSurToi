@@ -30,16 +30,16 @@
 
         return $resultat;
     }
-    function updateUnEtudiantAD($id,$nom,$prenom){
+    function updateUnEtudiantAD($unObjetEtudiant){
 
         $pdo =PDO2::getInstance();
         $etu=$pdo->prepare("UPDATE etudiant SET nom=:nom,prenom=:prenom WHERE id=:id");
-        $etu->bindValue(':nom',$nom);
-        $etu->bindValue(':prenom',$prenom);
-        $etu->bindValue(':id',$id);
+        $etu->bindValue(':nom',$unObjetEtudiant->getNom());
+        $etu->bindValue(':prenom',$unObjetEtudiant->getPrenom());
+        $etu->bindValue(':id',$unObjetEtudiant->getId());
         if($etu->execute()){
             
-            $resultat =  $prenom.' '.$nom.' modifié';
+            $resultat =  $unObjetEtudiant->getPrenom().' '.$unObjetEtudiant->getNom().' modifié';
          }
          else $resultat ='Erreur';
  
